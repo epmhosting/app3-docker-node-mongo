@@ -22,7 +22,8 @@ function connectDB() {
   mongoose
     .connect(
       'mongodb://mongo:27017/docker-node-mongo', {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
       }
     )
     .then(() => {
@@ -73,13 +74,13 @@ const port = 3000;
 app.listen(port, () => console.log(`Server running...on port ${port}`));
 
 
-https.createServer({
-  key: fs.readFileSync('./letsencrypt/docker.mightybest.com/privkey.pem'),
-  cert: fs.readFileSync('./letsencrypt/docker.mightybest.com/cert.pem'),
-  ca: fs.readFileSync('./letsencrypt/docker.mightybest.com/chain.pem')
-  // key: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/privkey.pem'),
-  // cert: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/cert.pem'),
-  // ca: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/chain.pem')
-}, app).listen(443, () => {
-  console.log('HTTPS Listening on port 443...')
-})
+// https.createServer({
+//   key: fs.readFileSync('./letsencrypt/docker.mightybest.com/privkey.pem'),
+//   cert: fs.readFileSync('./letsencrypt/docker.mightybest.com/cert.pem'),
+//   ca: fs.readFileSync('./letsencrypt/docker.mightybest.com/chain.pem')
+//   // key: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/privkey.pem'),
+//   // cert: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/cert.pem'),
+//   // ca: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/chain.pem')
+// }, app).listen(443, () => {
+//   console.log('HTTPS Listening on port 443...')
+// })
