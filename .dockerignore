@@ -1,6 +1,6 @@
-node_modules
-npm-debug.log
-*.ori
-*.sh
-*copy.*
+src/node_modules
+src/npm-debug.log
+src/*.ori
+src/*.sh
+src/*copy.*
 data
