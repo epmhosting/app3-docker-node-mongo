@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const http = require('http');
 const https = require('https');
 const fs = require('fs');
 
@@ -71,8 +72,18 @@ app.post('/item/add', (req, res) => {
 
 const port = 3000;
 
-app.listen(port, () => console.log(`Server running...on port ${port}`));
+// app.listen(port, () => console.log(`Server running...on port ${port}`));
 
+http.createServer(function(req, res) {   
+  // console.log(req.headers);
+  // console.log(req.headers['host']);
+  // console.log(req.url);
+  res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
+  res.end();
+}).listen(port, ()=> {
+  console.log(`Server running...on port ${port}`)
+  // console.log('hhhh');
+});
 
 https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/privkey.pem'),
