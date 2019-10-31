@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const https = require('https');
+const fs = require('fs');
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -68,3 +71,15 @@ app.post('/item/add', (req, res) => {
 const port = 3000;
 
 app.listen(port, () => console.log(`Server running...on port ${port}`));
+
+
+https.createServer({
+  key: fs.readFileSync('./letsencrypt/docker.mightybest.com/privkey.pem'),
+  cert: fs.readFileSync('./letsencrypt/docker.mightybest.com/cert.pem'),
+  ca: fs.readFileSync('./letsencrypt/docker.mightybest.com/chain.pem')
+  // key: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/privkey.pem'),
+  // cert: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/cert.pem'),
+  // ca: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/chain.pem')
+}, app).listen(443, () => {
+  console.log('HTTPS Listening on port 443...')
+})
