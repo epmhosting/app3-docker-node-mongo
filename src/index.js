@@ -86,9 +86,12 @@ http.createServer(function(req, res) {
 });
 
 https.createServer({
+  // for aws, has /etc/letscencrypt
   key: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/cert.pem'),
   ca: fs.readFileSync('/etc/letsencrypt/live/docker.mightybest.com/chain.pem'),
+  
+  // for local, no /etc/letscencrypt
   // key: fs.readFileSync('./letsencrypt/docker.mightybest.com/privkey.pem'),
   // cert: fs.readFileSync('./letsencrypt/docker.mightybest.com/cert.pem'),
   // ca: fs.readFileSync('./letsencrypt/docker.mightybest.com/chain.pem')
